@@ -1,0 +1,31 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store
+
+# Runtime artifacts
+records/uploads/*
+records/predictions/*
+records/logs/*
+!records/uploads/.gitkeep
+!records/predictions/.gitkeep
+!records/logs/.gitkeep
+
+# Model artifacts
+model/checkpoints/*
+!model/checkpoints/.gitkeep
+model/exports/*
+
+# Dataset artifacts
+data/raw/*
+!data/README.md
+data/processed/*
+data/annotations/*
+data/splits/*
+
+# School source files
+docs/source/
+
+# Local environment
+.venv/
+venv/

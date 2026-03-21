@@ -1,0 +1,43 @@
+{
+  "target_classes": {
+    "0": "银皇后类",
+    "1": "网纹凤梨类",
+    "2": "绿萝类",
+    "3": "心叶蔓绿绒类",
+    "4": "Rhaphidophora类",
+    "5": "金钱树类",
+    "6": "叶斑类病害",
+    "7": "枯萎/疫病类病害",
+    "8": "白粉/霉变类病害",
+    "9": "黄化/锈病/虫害类异常"
+  },
+  "indoor_mapping": {
+    "Aglaonema": 0,
+    "Cryptanthus": 1,
+    "Devil_s Ivy": 2,
+    "N-Joy Pothos": 2,
+    "Heartleaf philodendron": 3,
+    "Rhaphidophora": 4,
+    "Zz plant": 5
+  },
+  "plantdoc_disease_mapping": {
+    "Apple Scab Leaf": 6,
+    "Bell_pepper leaf spot": 6,
+    "Corn Gray leaf spot": 6,
+    "Tomato Septoria leaf spot": 6,
+    "Tomato leaf bacterial spot": 6,
+    "grape leaf black rot": 6,
+    "Corn leaf blight": 7,
+    "Potato leaf early blight": 7,
+    "Potato leaf late blight": 7,
+    "Tomato Early blight leaf": 7,
+    "Tomato leaf late blight": 7,
+    "Squash Powdery mildew leaf": 8,
+    "Tomato mold leaf": 8,
+    "Apple rust leaf": 9,
+    "Corn rust leaf": 9,
+    "Tomato leaf mosaic virus": 9,
+    "Tomato leaf yellow virus": 9,
+    "Tomato two spotted spider mites leaf": 9
+  }
+}

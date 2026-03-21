@@ -1,0 +1,16 @@
+path: ../../data/splits
+train: train/images
+val: val/images
+test: test/images
+
+names:
+  0: 银皇后类
+  1: 网纹凤梨类
+  2: 绿萝类
+  3: 心叶蔓绿绒类
+  4: Rhaphidophora类
+  5: 金钱树类
+  6: 叶斑类病害
+  7: 枯萎/疫病类病害
+  8: 白粉/霉变类病害
+  9: 黄化/锈病/虫害类异常
