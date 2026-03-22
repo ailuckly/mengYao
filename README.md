@@ -32,6 +32,7 @@ MengYao/
 ├── frontend/
 │   ├── templates/
 │   └── static/
+├── notebooks/
 ├── tests/
 ├── records/
 │   ├── uploads/
@@ -65,6 +66,9 @@ MengYao/
 
 - `docs/planning/Google Colab训练操作手册.md`
   Colab 云端训练的完整操作说明。
+
+- `notebooks/`
+  可直接在 Colab 中打开的训练 notebook。
 
 ## 后续开发建议
 
