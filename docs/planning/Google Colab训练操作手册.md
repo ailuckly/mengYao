@@ -130,12 +130,20 @@ names:
 ```python
 !python model/scripts/train.py \
   --data /content/workspace/project/model/configs/final_dataset_v1_colab.yaml \
+  --weights yolo11s.pt \
   --device 0 \
-  --epochs 40 \
+  --epochs 100 \
   --batch 32 \
   --imgsz 640 \
+  --optimizer auto \
+  --patience 30 \
+  --workers 4 \
+  --save-period 10 \
+  --close-mosaic 10 \
+  --seed 42 \
+  --cos-lr \
   --project /content/drive/MyDrive/MengYao_Colab/train_runs \
-  --name colab_formal_v2
+  --name colab_pro_formal_v1
 ```
 
 ## 5. 断点续训
@@ -145,7 +153,7 @@ names:
 ```python
 !python model/scripts/train.py \
   --resume \
-  --resume-path /content/drive/MyDrive/MengYao_Colab/train_runs/colab_formal_v2/weights/last.pt
+  --resume-path /content/drive/MyDrive/MengYao_Colab/train_runs/colab_pro_formal_v1/weights/last.pt
 ```
 
 ## 6. 结果检查
@@ -186,6 +194,6 @@ notebooks/colab_resume_train.ipynb
 
 1. 首次训练直接把输出目录写到 Google Drive
 2. 免费 Colab 中断后用 `last.pt` 继续训练
-3. 把总 epoch 控制在 `40` 左右，不必硬跑更长
+3. 正式实验优先使用 `yolo11s + 100 epoch`，中断时直接从 `last.pt` 续训
 
 现在已经到“可以从仓库直接拉到 Colab 并断点续训”的状态了。
