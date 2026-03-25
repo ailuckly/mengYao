@@ -17,6 +17,7 @@ model/checkpoints/*
 model/exports/*
 
 # Dataset artifacts
+data/*.zip
 data/raw/*
 !data/README.md
 data/processed/*

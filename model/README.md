@@ -19,11 +19,26 @@
 
 ```bash
 python model/scripts/train.py \
-  --data model/configs/dataset.example.yaml \
-  --weights yolo11n.pt \
+  --data model/configs/final_dataset_v1.yaml \
+  --weights yolo11s.pt \
   --epochs 100 \
-  --batch 16
+  --batch 32 \
+  --imgsz 640 \
+  --optimizer auto \
+  --patience 30 \
+  --workers 4 \
+  --save-period 10 \
+  --close-mosaic 10 \
+  --seed 42 \
+  --cos-lr
 ```
+
+## 当前推荐权重
+
+- 联调和演示默认使用：`model/checkpoints/best.pt`
+- 断点续训保留：`model/checkpoints/last.pt`
+
+如果你是在 Colab 中训练，建议把训练输出写到 Google Drive，然后把 `best.pt` 同步回 `model/checkpoints/`。
 
 ## 预测命令示例
 
