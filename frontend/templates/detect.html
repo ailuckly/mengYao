@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}开始识别 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="hero hero-detect">
+  <div class="hero-copy">
+    <p class="eyebrow">Interactive Detection Workspace</p>
+    <h1>植物识别与叶部异常辅助检测</h1>
+    <p class="lead">上传单张图片后，系统将调用 YOLOv11 模型进行识别，并同步展示结果图、主判定类别、置信度和建议信息。</p>
+  </div>
+
+  <aside class="hero-panel">
+    <div class="hero-panel-top">
+      <span class="hero-panel-label">系统运行概况</span>
+      <span id="mode-badge" class="status-pill">推理模式读取中</span>
+    </div>
+    <div class="hero-stats">
+      <article class="hero-stat">
+        <span class="hero-stat-label">支持类别</span>
+        <strong id="labels-count">--</strong>
+      </article>
+      <article class="hero-stat">
+        <span class="hero-stat-label">预测数量</span>
+        <strong id="prediction-count">0</strong>
+      </article>
+      <article class="hero-stat">
+        <span class="hero-stat-label">当前状态</span>
+        <strong id="service-health">待检查</strong>
+      </article>
+    </div>
+    <p class="hero-note">系统默认优先使用 `model/checkpoints/best.pt` 进行真实推理。</p>
+  </aside>
+</section>
+
+<section class="workspace">
+  <section class="upload-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Step 1</p>
+      <h2>上传待识别图片</h2>
+    </div>
+
+    <form id="predict-form" class="upload-form">
+      <label class="upload-box" for="image-input">
+        <span class="upload-title">拖入或选择植物图片</span>
+        <span class="upload-hint">建议使用主体清晰、光照正常的 JPG 或 PNG 图片</span>
+        <input id="image-input" name="file" type="file" accept=".jpg,.jpeg,.png" required>
+      </label>
+
+      <div class="action-row">
+        <button type="submit">开始识别</button>
+        <div class="file-note">
+          <span>当前文件</span>
+          <strong id="file-name">尚未选择图片</strong>
+        </div>
+      </div>
+    </form>
+
+    <p id="status" class="status status-idle">等待上传图片。</p>
+  </section>
+
+  <section class="summary-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Step 2</p>
+      <h2>识别摘要</h2>
+    </div>
+
+    <div class="summary-grid">
+      <article class="summary-card">
+        <span>主判定类别</span>
+        <strong id="top-label">等待识别</strong>
+      </article>
+      <article class="summary-card">
+        <span>最高置信度</span>
+        <strong id="top-score">--</strong>
+      </article>
+      <article class="summary-card">
+        <span>推理来源</span>
+        <strong id="prediction-source">--</strong>
+      </article>
+    </div>
+
+    <div class="explain-box">
+      <h3>结果说明</h3>
+      <p>识别完成后，系统会自动写入历史记录，你可以前往“历史记录”页面查看保存结果与详情页面。</p>
+    </div>
+    <a id="history-link" class="inline-link disabled-link" href="{{ url_for('main.history') }}">识别后查看历史详情</a>
+  </section>
+</section>
+
+<section class="visual-stage">
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Step 3</p>
+      <h2>上传图片预览</h2>
+    </div>
+    <div class="image-frame">
+      <img id="preview-image" class="preview-image" alt="上传预览图">
+      <div id="preview-empty" class="empty-state">图片预览将显示在这里</div>
+    </div>
+  </article>
+
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Step 4</p>
+      <h2>识别结果可视化</h2>
+    </div>
+    <div class="image-frame image-frame-result">
+      <img id="result-image" class="preview-image" alt="识别结果图">
+      <div id="result-empty" class="empty-state">识别完成后，将在这里展示检测框结果图</div>
+    </div>
+  </article>
+</section>
+
+<section class="results-zone">
+  <article class="results-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Step 5</p>
+      <h2>识别详情</h2>
+    </div>
+    <div id="result-list" class="result-list">
+      <div class="empty-inline">上传图片后，这里会显示类别、置信度、检测框与建议。</div>
+    </div>
+  </article>
+
+  <aside class="labels-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Dataset Scope</p>
+      <h2>当前支持类别</h2>
+    </div>
+    <div id="labels-list" class="labels-list"></div>
+  </aside>
+</section>
+
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

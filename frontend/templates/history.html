@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}历史记录 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div>
+    <p class="eyebrow">Recognition Archive</p>
+    <h1>历史识别记录</h1>
+    <p class="lead">系统会自动保存每次识别结果，便于回看、筛选和论文截图整理。</p>
+  </div>
+
+  <form class="filter-form" method="get" action="{{ url_for('main.history') }}">
+    <label for="label-filter">按主判定类别筛选</label>
+    <select id="label-filter" name="label">
+      <option value="">全部类别</option>
+      {% for label in labels %}
+      <option value="{{ label }}" {% if selected_label == label %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">筛选</button>
+  </form>
+</section>
+
+<section class="history-summary">
+  <article class="summary-card">
+    <span>记录总数</span>
+    <strong>{{ records|length }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>当前筛选</span>
+    <strong>{{ selected_label or "全部类别" }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>数据来源</span>
+    <strong>SQLite 本地记录</strong>
+  </article>
+</section>
+
+<section class="history-list">
+  {% if records %}
+    {% for record in records %}
+    <article class="history-card">
+      <div class="history-image-stack">
+        <img src="{{ record.upload_image }}" alt="{{ record.image_name }}">
+        <img src="{{ record.result_image }}" alt="识别结果图">
+      </div>
+
+      <div class="history-copy">
+        <div class="history-meta">
+          <span>{{ record.created_at }}</span>
+          <span>{{ record.inference_mode }}</span>
+        </div>
+        <h2>{{ record.top_label }}</h2>
+        <p>主判定置信度：{{ "%.4f"|format(record.top_score) }}</p>
+        <p>检测结果数量：{{ record.prediction_count }}</p>
+        <p>文件名：{{ record.image_name }}</p>
+      </div>
+
+      <div class="history-actions">
+        <a class="inline-link" href="{{ url_for('main.history_detail', record_id=record.id) }}">查看详情</a>
+        <form method="post" action="{{ url_for('main.history_delete', record_id=record.id) }}">
+          <button class="danger-button" type="submit">删除记录</button>
+        </form>
+      </div>
+    </article>
+    {% endfor %}
+  {% else %}
+    <div class="empty-panel">暂无符合条件的识别记录，可先前往“开始识别”页面完成一次识别。</div>
+  {% endif %}
+</section>
+{% endblock %}

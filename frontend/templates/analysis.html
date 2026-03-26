@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}模型分析 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div>
+    <p class="eyebrow">Model Analysis</p>
+    <h1>模型训练结果分析</h1>
+    <p class="lead">本页集中展示本项目当前最佳模型的核心指标、类别范围和训练可视化结果，用于支撑论文中的实验结果分析章节。</p>
+  </div>
+</section>
+
+<section class="analysis-summary">
+  <article class="summary-card">
+    <span>训练模型</span>
+    <strong>{{ analysis.model }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>最佳 epoch</span>
+    <strong>{{ analysis.best_epoch }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>支持类别数</span>
+    <strong>{{ analysis.class_count }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>Precision</span>
+    <strong>{{ "%.4f"|format(analysis.metrics.precision) }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>Recall</span>
+    <strong>{{ "%.4f"|format(analysis.metrics.recall) }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>mAP50 / mAP50-95</span>
+    <strong>{{ "%.4f"|format(analysis.metrics.map50) }} / {{ "%.4f"|format(analysis.metrics.map50_95) }}</strong>
+  </article>
+</section>
+
+<section class="content-split">
+  <article class="spotlight-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Run Info</p>
+      <h2>训练批次</h2>
+    </div>
+    <p>当前展示的实验结果来自：<strong>{{ analysis.run_name }}</strong>。该轮训练采用 YOLOv11s 模型，已作为系统默认演示权重使用。</p>
+    <p>{{ analysis.notes }}</p>
+  </article>
+
+  <article class="spotlight-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Class Scope</p>
+      <h2>类别范围</h2>
+    </div>
+    <div class="labels-list">
+      {% for label in analysis.labels %}
+      <span class="label-chip">{{ label }}</span>
+      {% endfor %}
+    </div>
+  </article>
+</section>
+
+<section class="visual-stage">
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Training Curves</p>
+      <h2>训练曲线</h2>
+    </div>
+    <div class="image-frame image-frame-result">
+      {% if analysis.artifact_exists.results_plot %}
+      <img class="preview-image visible" src="{{ analysis.artifact_urls.results_plot }}" alt="训练曲线图">
+      {% else %}
+      <div class="empty-state static-empty">训练曲线图暂未就绪，可在补齐训练产物后继续展示。</div>
+      {% endif %}
+    </div>
+  </article>
+
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Confusion Matrix</p>
+      <h2>归一化混淆矩阵</h2>
+    </div>
+    <div class="image-frame image-frame-result">
+      {% if analysis.artifact_exists.confusion_matrix %}
+      <img class="preview-image visible" src="{{ analysis.artifact_urls.confusion_matrix }}" alt="混淆矩阵图">
+      {% else %}
+      <div class="empty-state static-empty">混淆矩阵图暂未就绪，可在补齐训练产物后继续展示。</div>
+      {% endif %}
+    </div>
+  </article>
+</section>
+{% endblock %}

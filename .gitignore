@@ -4,6 +4,7 @@ __pycache__/
 .DS_Store
 
 # Runtime artifacts
+records/*.db
 records/uploads/*
 records/predictions/*
 records/logs/*

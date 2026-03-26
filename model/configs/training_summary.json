@@ -1,0 +1,17 @@
+{
+  "run_name": "colab_pro_formal_v13",
+  "model": "YOLOv11s",
+  "best_epoch": 83,
+  "dataset_name": "final_v1",
+  "metrics": {
+    "precision": 0.7441,
+    "recall": 0.7495,
+    "map50": 0.7279,
+    "map50_95": 0.6754
+  },
+  "artifact_urls": {
+    "results_plot": "/static/images/analysis/results.png",
+    "confusion_matrix": "/static/images/analysis/confusion_matrix_normalized.png"
+  },
+  "notes": "植物类别整体效果较好，病害与异常类别仍存在类间混淆，当前 best.pt 可作为系统演示模型。"
+}

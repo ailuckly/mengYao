@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}首页 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="hero hero-home">
+  <div class="hero-copy">
+    <p class="eyebrow">YOLOv11 Plant Recognition System</p>
+    <h1>面向家庭园艺场景的植物识别与叶部异常辅助分析系统</h1>
+    <p class="lead">系统以家庭常见绿植识别与典型叶部病害、异常辅助识别为核心，提供图片上传、结果可视化、历史记录、植物知识库和模型分析等功能，适合作为毕业设计展示与演示系统使用。</p>
+    <div class="hero-tags">
+      <span>家庭绿植识别</span>
+      <span>病害辅助分析</span>
+      <span>Flask + YOLOv11s</span>
+      <span>本地可演示系统</span>
+    </div>
+    <div class="cta-row">
+      <a class="cta-button" href="{{ url_for('main.detect') }}">立即开始识别</a>
+      <a class="ghost-link" href="{{ url_for('main.analysis') }}">查看模型结果</a>
+    </div>
+  </div>
+
+  <aside class="hero-panel">
+    <div class="hero-panel-top">
+      <span class="hero-panel-label">模型摘要</span>
+      <span class="status-pill is-live">已接入真实模型</span>
+    </div>
+    <div class="hero-stats">
+      <article class="hero-stat">
+        <span class="hero-stat-label">训练模型</span>
+        <strong>{{ analysis.model }}</strong>
+      </article>
+      <article class="hero-stat">
+        <span class="hero-stat-label">最佳 epoch</span>
+        <strong>{{ analysis.best_epoch }}</strong>
+      </article>
+      <article class="hero-stat">
+        <span class="hero-stat-label">支持类别</span>
+        <strong>{{ analysis.class_count }}</strong>
+      </article>
+    </div>
+    <p class="hero-note">当前最佳结果：mAP50 = {{ "%.4f"|format(analysis.metrics.map50) }}，mAP50-95 = {{ "%.4f"|format(analysis.metrics.map50_95) }}。</p>
+  </aside>
+</section>
+
+<section class="feature-grid">
+  <article class="feature-card">
+    <p class="section-eyebrow">Module 01</p>
+    <h2>单图识别</h2>
+    <p>上传植物图片后返回识别结果图、预测类别、置信度和建议，构成系统主流程。</p>
+  </article>
+  <article class="feature-card">
+    <p class="section-eyebrow">Module 02</p>
+    <h2>历史记录</h2>
+    <p>系统自动保存识别历史，可回看历史结果、识别时间、结果图与主判定类别。</p>
+  </article>
+  <article class="feature-card">
+    <p class="section-eyebrow">Module 03</p>
+    <h2>知识库</h2>
+    <p>围绕最终 10 类植物与病害/异常整理静态知识卡片，补充项目完整度与应用价值。</p>
+  </article>
+  <article class="feature-card">
+    <p class="section-eyebrow">Module 04</p>
+    <h2>模型分析</h2>
+    <p>展示训练模型、最佳指标、结果曲线和混淆矩阵，为论文实验分析提供图表基础。</p>
+  </article>
+</section>
+
+<section class="content-split">
+  <article class="spotlight-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">System Scope</p>
+      <h2>系统定位</h2>
+    </div>
+    <p>本系统主要针对家庭园艺场景中的常见观叶植物与典型叶部异常进行辅助识别，不追求复杂后台和多用户能力，而是聚焦于模型识别、结果展示、辅助建议与实验分析。</p>
+  </article>
+
+  <article class="spotlight-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Experiment Result</p>
+      <h2>当前实验结论</h2>
+    </div>
+    <ul class="bullet-list">
+      <li>植物类别整体识别效果较好，适合答辩演示。</li>
+      <li>病害与异常类具备辅助判断能力，但仍存在类间混淆。</li>
+      <li>当前 best.pt 已可作为系统正式演示模型。</li>
+    </ul>
+  </article>
+</section>
+{% endblock %}

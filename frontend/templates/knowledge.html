@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}知识库 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div>
+    <p class="eyebrow">Knowledge Base</p>
+    <h1>植物与病害知识库</h1>
+    <p class="lead">围绕最终训练类别整理植物简介、典型特征、养护建议和异常说明，用于补充系统的辅助服务能力。</p>
+  </div>
+</section>
+
+<section class="knowledge-section">
+  <div class="section-heading">
+    <p class="section-eyebrow">Plant Classes</p>
+    <h2>植物类别</h2>
+  </div>
+  <div class="knowledge-grid">
+    {% for item in grouped_items.plant %}
+    <article class="knowledge-card">
+      <div class="knowledge-head">
+        <strong>{{ item.label }}</strong>
+        <span>{{ item.alias }}</span>
+      </div>
+      <p>{{ item.description }}</p>
+      <div class="knowledge-block">
+        <h3>典型特征</h3>
+        <ul class="bullet-list">
+          {% for feature in item.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="knowledge-block">
+        <h3>养护建议</h3>
+        <ul class="bullet-list">
+          {% for tip in item.care_tips %}
+          <li>{{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <p class="risk-note">提示：{{ item.risk_note }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="knowledge-section">
+  <div class="section-heading">
+    <p class="section-eyebrow">Disease / Abnormality</p>
+    <h2>病害与异常类别</h2>
+  </div>
+  <div class="knowledge-grid">
+    {% for item in grouped_items.disease %}
+    <article class="knowledge-card">
+      <div class="knowledge-head">
+        <strong>{{ item.label }}</strong>
+        <span>{{ item.alias }}</span>
+      </div>
+      <p>{{ item.description }}</p>
+      <div class="knowledge-block">
+        <h3>典型表现</h3>
+        <ul class="bullet-list">
+          {% for feature in item.features %}
+          <li>{{ feature }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="knowledge-block">
+        <h3>处理建议</h3>
+        <ul class="bullet-list">
+          {% for tip in item.care_tips %}
+          <li>{{ tip }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      <p class="risk-note">提示：{{ item.risk_note }}</p>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

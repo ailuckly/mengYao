@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}家庭园艺植物识别系统{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Serif+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="page-noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="{{ url_for('main.home') }}">
+        <span class="brand-mark">Y11</span>
+        <span class="brand-copy">
+          <strong>家庭园艺植物识别系统</strong>
+          <small>Graduation Project Demo</small>
+        </span>
+      </a>
+
+      <nav class="site-nav" aria-label="主导航">
+        <a class="{% if active_page == 'home' %}is-active{% endif %}" href="{{ url_for('main.home') }}">首页</a>
+        <a class="{% if active_page == 'detect' %}is-active{% endif %}" href="{{ url_for('main.detect') }}">开始识别</a>
+        <a class="{% if active_page == 'history' %}is-active{% endif %}" href="{{ url_for('main.history') }}">历史记录</a>
+        <a class="{% if active_page == 'knowledge' %}is-active{% endif %}" href="{{ url_for('main.knowledge') }}">知识库</a>
+        <a class="{% if active_page == 'analysis' %}is-active{% endif %}" href="{{ url_for('main.analysis') }}">模型分析</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}页面不存在 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <p class="eyebrow">404 Not Found</p>
+  <h1>未找到对应页面</h1>
+  <p class="lead">你访问的页面不存在，可能是记录已删除、地址输入有误，或当前链接已经失效。可以返回首页或继续前往识别页使用系统。</p>
+  <div class="cta-row">
+    <a class="cta-button" href="{{ url_for('main.home') }}">返回首页</a>
+    <a class="ghost-link" href="{{ url_for('main.detect') }}">前往开始识别</a>
+  </div>
+</section>
+{% endblock %}

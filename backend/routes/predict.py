@@ -1,17 +1,19 @@
 import logging
 
-from flask import Blueprint, jsonify, request
-
-from backend.services.plant_service import PlantRecognitionService
+from flask import Blueprint, current_app, jsonify, request
 
 
 predict_bp = Blueprint("predict", __name__)
-service = PlantRecognitionService()
 logger = logging.getLogger(__name__)
+
+
+def _service():
+    return current_app.extensions["project_services"]["plant_service"]
 
 
 @predict_bp.get("/health")
 def health():
+    service = _service()
     return jsonify(
         {
             "status": "ok",
@@ -24,6 +26,7 @@ def health():
 
 @predict_bp.get("/labels")
 def labels():
+    service = _service()
     return jsonify(
         {
             "status": "ok",
@@ -35,6 +38,7 @@ def labels():
 
 @predict_bp.post("/predict")
 def predict():
+    service = _service()
     file = request.files.get("file")
     if file is None:
         return jsonify({"status": "error", "message": "未接收到图片文件"}), 400

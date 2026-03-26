@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}识别详情 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="page-intro">
+  <div>
+    <p class="eyebrow">Record Detail</p>
+    <h1>识别详情</h1>
+    <p class="lead">该页面用于展示单次识别任务的完整结果，便于答辩时说明系统的结果保存与追溯能力。</p>
+  </div>
+  <a class="ghost-link" href="{{ url_for('main.history') }}">返回历史记录</a>
+</section>
+
+<section class="history-summary">
+  <article class="summary-card">
+    <span>识别时间</span>
+    <strong>{{ record.created_at }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>主判定类别</span>
+    <strong>{{ record.top_label }}</strong>
+  </article>
+  <article class="summary-card">
+    <span>最高置信度</span>
+    <strong>{{ "%.4f"|format(record.top_score) }}</strong>
+  </article>
+</section>
+
+<section class="visual-stage">
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Original</p>
+      <h2>原始图片</h2>
+    </div>
+    <div class="image-frame">
+      <img class="preview-image visible" src="{{ record.upload_image }}" alt="{{ record.image_name }}">
+    </div>
+  </article>
+
+  <article class="media-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Result</p>
+      <h2>结果图片</h2>
+    </div>
+    <div class="image-frame image-frame-result">
+      <img class="preview-image visible" src="{{ record.result_image }}" alt="识别结果图">
+    </div>
+  </article>
+</section>
+
+<section class="results-zone">
+  <article class="results-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Predictions</p>
+      <h2>识别结果列表</h2>
+    </div>
+    <div class="result-list">
+      {% for item in record.predictions %}
+      <article class="result-item">
+        <strong>{{ item.label }}</strong>
+        <p>置信度：<span>{{ "%.4f"|format(item.score) }}</span></p>
+        <p>检测框：<span>{{ item.box|join(", ") }}</span></p>
+        <p>推理来源：<span>{{ item.source }}</span></p>
+      </article>
+      {% endfor %}
+    </div>
+  </article>
+
+  <aside class="labels-panel">
+    <div class="section-heading">
+      <p class="section-eyebrow">Advice</p>
+      <h2>辅助建议</h2>
+    </div>
+    <div class="result-list">
+      {% for advice in record.advice %}
+      <article class="result-item">
+        <p><span>{{ advice }}</span></p>
+      </article>
+      {% endfor %}
+    </div>
+  </aside>
+</section>
+{% endblock %}
