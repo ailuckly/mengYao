@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}注册 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="auth-layout">
+  <article class="auth-copy">
+    <p class="eyebrow">New Account</p>
+    <h1>创建你的识别账号</h1>
+    <p class="lead">账号用于区分本地使用者的访问状态。注册完成后会直接进入图片识别页面。</p>
+  </article>
+
+  <article class="auth-card">
+    <div class="section-heading">
+      <p class="section-eyebrow">Account</p>
+      <h2>注册</h2>
+    </div>
+    {% if error %}
+    <p class="status status-error">{{ error }}</p>
+    {% endif %}
+    <form class="auth-form" method="post" action="{{ url_for('auth.register') }}">
+      <label>
+        <span>用户名</span>
+        <input name="username" type="text" value="{{ username }}" autocomplete="username" required>
+      </label>
+      <label>
+        <span>密码</span>
+        <input name="password" type="password" autocomplete="new-password" minlength="6" required>
+      </label>
+      <button type="submit">创建账号</button>
+    </form>
+    <p class="auth-switch">已有账号？<a class="inline-link" href="{{ url_for('auth.login') }}">返回登录</a></p>
+  </article>
+</section>
+{% endblock %}

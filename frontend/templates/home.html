@@ -7,13 +7,7 @@
   <div class="hero-copy">
     <p class="eyebrow">YOLOv11 Plant Recognition System</p>
     <h1>面向家庭园艺场景的植物识别与叶部异常辅助分析系统</h1>
-    <p class="lead">系统以家庭常见绿植识别与典型叶部病害、异常辅助识别为核心，提供图片上传、结果可视化、历史记录、植物知识库和模型分析等功能，适合作为毕业设计展示与演示系统使用。</p>
-    <div class="hero-tags">
-      <span>家庭绿植识别</span>
-      <span>病害辅助分析</span>
-      <span>Flask + YOLOv11s</span>
-      <span>本地可演示系统</span>
-    </div>
+    <p class="lead">系统以家庭常见绿植识别与典型叶部病害、异常辅助识别为核心，提供图片上传、结果可视化、历史记录、植物知识库和模型分析等功能，适合作为毕业设计系统使用。</p>
     <div class="cta-row">
       <a class="cta-button" href="{{ url_for('main.detect') }}">立即开始识别</a>
       <a class="ghost-link" href="{{ url_for('main.analysis') }}">查看模型结果</a>
@@ -78,12 +72,12 @@
   <article class="spotlight-panel">
     <div class="section-heading">
       <p class="section-eyebrow">Experiment Result</p>
-      <h2>当前实验结论</h2>
+    <h2>当前实验结论</h2>
     </div>
     <ul class="bullet-list">
-      <li>植物类别整体识别效果较好，适合答辩演示。</li>
+      <li>植物类别整体识别效果较好，适合作为答辩系统说明依据。</li>
       <li>病害与异常类具备辅助判断能力，但仍存在类间混淆。</li>
-      <li>当前 best.pt 已可作为系统正式演示模型。</li>
+      <li>当前 best.pt 已作为系统默认推理模型。</li>
     </ul>
   </article>
 </section>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}登录 | 家庭园艺植物识别系统{% endblock %}
+
+{% block content %}
+<section class="auth-layout">
+  <article class="auth-copy">
+    <p class="eyebrow">Garden Workspace</p>
+    <h1>进入植物识别工作台</h1>
+    <p class="lead">登录后可上传图片、查看历史记录，并继续浏览植物知识库与模型分析结果。</p>
+  </article>
+
+  <article class="auth-card">
+    <div class="section-heading">
+      <p class="section-eyebrow">Account</p>
+      <h2>登录</h2>
+    </div>
+    {% if error %}
+    <p class="status status-error">{{ error }}</p>
+    {% endif %}
+    <form class="auth-form" method="post" action="{{ url_for('auth.login') }}">
+      <input type="hidden" name="next" value="{{ next_url }}">
+      <label>
+        <span>用户名</span>
+        <input name="username" type="text" value="{{ username }}" autocomplete="username" required>
+      </label>
+      <label>
+        <span>密码</span>
+        <input name="password" type="password" autocomplete="current-password" required>
+      </label>
+      <button type="submit">登录系统</button>
+    </form>
+    <p class="auth-switch">还没有账号？<a class="inline-link" href="{{ url_for('auth.register') }}">创建账号</a></p>
+  </article>
+</section>
+{% endblock %}

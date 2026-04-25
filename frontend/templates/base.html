@@ -17,7 +17,7 @@
         <span class="brand-mark">Y11</span>
         <span class="brand-copy">
           <strong>家庭园艺植物识别系统</strong>
-          <small>Graduation Project Demo</small>
+          <small>Plant Intelligence Workspace</small>
         </span>
       </a>
 
@@ -27,6 +27,14 @@
         <a class="{% if active_page == 'history' %}is-active{% endif %}" href="{{ url_for('main.history') }}">历史记录</a>
         <a class="{% if active_page == 'knowledge' %}is-active{% endif %}" href="{{ url_for('main.knowledge') }}">知识库</a>
         <a class="{% if active_page == 'analysis' %}is-active{% endif %}" href="{{ url_for('main.analysis') }}">模型分析</a>
+        {% if current_user %}
+        <form class="nav-logout" method="post" action="{{ url_for('auth.logout') }}">
+          <button type="submit">退出</button>
+        </form>
+        {% else %}
+        <a class="{% if active_page == 'login' %}is-active{% endif %}" href="{{ url_for('auth.login') }}">登录</a>
+        <a class="{% if active_page == 'register' %}is-active{% endif %}" href="{{ url_for('auth.register') }}">注册</a>
+        {% endif %}
       </nav>
     </header>
 

@@ -113,9 +113,11 @@ a {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
-.site-nav a {
+.site-nav a,
+.nav-logout button {
   padding: 10px 14px;
   border-radius: 999px;
   color: var(--muted);
@@ -123,10 +125,20 @@ a {
 }
 
 .site-nav a:hover,
-.site-nav a.is-active {
+.site-nav a.is-active,
+.nav-logout button:hover {
   background: rgba(255, 251, 245, 0.82);
   color: var(--text);
   transform: translateY(-1px);
+}
+
+.nav-logout {
+  margin: 0;
+}
+
+.nav-logout button {
+  background: transparent;
+  box-shadow: none;
 }
 
 .page {
@@ -143,14 +155,16 @@ a {
 .history-summary,
 .analysis-summary,
 .history-list,
-.knowledge-grid {
+.knowledge-grid,
+.auth-layout {
   margin-top: 24px;
 }
 
 .hero,
 .workspace,
 .results-zone,
-.content-split {
+.content-split,
+.auth-layout {
   display: grid;
   gap: 24px;
 }
@@ -170,7 +184,8 @@ a {
 }
 
 .results-zone,
-.content-split {
+.content-split,
+.auth-layout {
   grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
 }
 
@@ -311,7 +326,8 @@ button:hover {
 .feature-card,
 .spotlight-panel,
 .history-card,
-.knowledge-card {
+.knowledge-card,
+.auth-card {
   position: relative;
   background: var(--panel);
   border: 1px solid rgba(155, 132, 101, 0.22);
@@ -330,7 +346,8 @@ button:hover {
 .feature-card::before,
 .spotlight-panel::before,
 .history-card::before,
-.knowledge-card::before {
+.knowledge-card::before,
+.auth-card::before {
   content: "";
   position: absolute;
   inset: 0 auto auto 0;
@@ -348,7 +365,8 @@ button:hover {
 .feature-card,
 .spotlight-panel,
 .history-card,
-.knowledge-card {
+.knowledge-card,
+.auth-card {
   padding: 24px;
 }
 
@@ -418,9 +436,61 @@ button:hover {
 .hero-note,
 .spotlight-panel p,
 .feature-card p,
-.knowledge-card p {
+.knowledge-card p,
+.auth-switch {
   color: var(--muted);
   line-height: 1.8;
+}
+
+.auth-copy {
+  padding: clamp(18px, 4vw, 44px) min(4vw, 44px) 0 0;
+}
+
+.auth-copy h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-family: "Cormorant Garamond", "Noto Serif SC", serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 600;
+  line-height: 0.97;
+}
+
+.auth-card {
+  justify-self: end;
+  width: min(100%, 430px);
+}
+
+.auth-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.auth-form label span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.auth-form input {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid rgba(162, 141, 111, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 252, 245, 0.9);
+  color: var(--text);
+  font: inherit;
+}
+
+.auth-form input:focus {
+  outline: 3px solid color-mix(in srgb, var(--accent) 22%, transparent 78%);
+  border-color: color-mix(in srgb, var(--accent) 68%, var(--line) 32%);
+}
+
+.auth-switch {
+  margin: 18px 0 0;
 }
 
 .section-heading h2,
@@ -706,7 +776,8 @@ button:hover {
   .workspace,
   .results-zone,
   .content-split,
-  .history-card {
+  .history-card,
+  .auth-layout {
     grid-template-columns: 1fr;
   }
 
@@ -732,6 +803,11 @@ button:hover {
   }
 
   .hero-panel {
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .auth-card {
     width: 100%;
     justify-self: stretch;
   }

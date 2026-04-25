@@ -27,7 +27,7 @@ class PlantRecognitionService:
     def is_model_loaded(self) -> bool:
         return self.predictor.model is not None
 
-    def predict(self, file: FileStorage) -> dict:
+    def predict(self, file: FileStorage, user_id: int) -> dict:
         upload_path = save_upload_file(file)
         predictions = self.predictor.predict(upload_path)
         labels = [item["label"] for item in predictions]
@@ -39,6 +39,7 @@ class PlantRecognitionService:
 
         record_id = self.history_repo.add_record(
             {
+                "user_id": user_id,
                 "created_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
                 "image_name": upload_path.name,
                 "upload_image": upload_image,
